@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ysar.module.user.domain.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper 接口
@@ -15,4 +17,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserEntityMapper extends BaseMapper<UserEntity> {
 
+    List<UserEntity> findAll();
 }
