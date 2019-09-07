@@ -1,0 +1,31 @@
+package ${cfg.basePackage}.module .${cfg.modulePackage}.domain.dto;
+
+        import ${cfg.basePackage}.common.domain.PageBaseDTO;
+        import io.swagger.annotations.ApiModelProperty;
+        import lombok.Data;
+    #if(${cfg.hasBigDecimal})
+            import java.math.BigDecimal;
+    #end
+    #if(${cfg.hasDate})
+            import java.util.Date;
+    #end
+    #if(${cfg.hasList})
+            import java.util.List;
+    #end
+
+        /**
+         * [ ${cfg.tableDesc} ]
+         *
+         * @author ${cfg.author}
+         * @version 1.0
+         * @company ${cfg.company}
+         * @copyright (c) 2019 ${cfg.company}Inc. All rights reserved.
+         * @date ${cfg.date}
+         * @since JDK1.8
+         */
+        @Data
+        public class ${cfg.moduleClass}QueryDTO extends PageBaseDTO{
+
+
+
+        }

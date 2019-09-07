@@ -1,0 +1,75 @@
+package ${cfg.basePackage}.module .${cfg.modulePackage}.service;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${cfg.basePackage}.common.domain.dto.PageInfoDTO;
+import ${cfg.basePackage}.common.domain.dto.ResponseDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}DTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}QueryDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.entity.${cfg.moduleClass}Entity;
+import ${cfg.basePackage}.utils.PaginationUtil;
+import com.gangquan360.smartutil.bean.SmartBeanUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+* [ ${cfg.tableDesc} ]
+*
+* @author ${cfg.author}
+* @version 1.0
+* @company ${cfg.company}
+* @copyright (c) 2019 ${cfg.company}Inc. All rights reserved.
+* @date ${cfg.date}
+* @since JDK1.8
+*/
+@Service
+public interface ${cfg.moduleClass}Service {
+
+    /**
+    * @author ${cfg.author}
+    * @description 分页查询
+     * @param queryDTO
+    * @date ${cfg.date}
+    */
+    ResponseDTO<PageInfoDTO<${cfg.moduleClass}DTO>>queryByPage(${cfg.moduleClass}QueryDTO queryDTO);
+
+    /**
+    * @author ${cfg.author}
+    * @description 添加
+     * @param addDTO
+    * @date ${cfg.date}
+    */
+    ResponseDTO<String>add(${cfg.moduleClass}DTO addDTO);
+
+
+    /**
+    * @author ${cfg.author}
+    * @description 编辑
+     * @param udpateDTO
+    * @date ${cfg.date}
+    */
+    @Transactional(rollbackFor=Exception.class)
+    ResponseDTO<String>update(${cfg.moduleClass}DTO updateDTO);
+
+
+    /**
+    * @author ${cfg.author}
+    * @description 根据ID删除
+    * @param id
+    * @date ${cfg.date}
+    */
+    @Transactional(rollbackFor=Exception.class)
+    ResponseDTO<String>delete(Long id);
+
+    /**
+    * @author ${cfg.author}
+    * @description 根据ID查询
+    * @param id
+    * @date ${cfg.date}
+    */
+    ResponseDTO<${cfg.moduleClass}DTO>detail(Long id);
+
+}

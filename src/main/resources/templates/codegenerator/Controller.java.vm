@@ -1,0 +1,63 @@
+package ${cfg.basePackage}.module .${cfg.modulePackage}.controller;
+
+import ${cfg.basePackage}.common.domain.dto.PageInfoDTO;
+import ${cfg.basePackage}.common.domain.dto.ResponseDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}DTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}QueryDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.service.${cfg.moduleClass}Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+/**
+ * [ ${cfg.tableDesc} ]
+ *
+ * @author ${cfg.author}
+ * @version 1.0
+ * @company ${cfg.company}
+ * @copyright (c) 2019 ${cfg.company}Inc. All rights reserved.
+ * @date ${cfg.date}
+ * @since JDK1.8
+ */
+@RestController
+@Api(tags={"${cfg.tableDesc}" })
+public class ${cfg.moduleClass}Controller{
+
+        @Autowired
+        private ${cfg.moduleClass}Service ${cfg.moduleVar}Service;
+
+        @ApiOperation(value="分页查询${cfg.tableDesc}",notes="@author ${cfg.author}")
+        @PostMapping("/${cfg.moduleVar}/page/query")
+        public ResponseDTO<PageInfoDTO<${cfg.moduleClass}DTO>>queryByPage(@RequestBody ${cfg.moduleClass}QueryDTO queryDTO){
+        return ${cfg.moduleVar}Service.queryByPage(queryDTO);
+        }
+
+        @ApiOperation(value="添加${cfg.tableDesc}",notes="@author ${cfg.author}")
+        @PostMapping("/${cfg.moduleVar}/add")
+        public ResponseDTO<String>add(@RequestBody@Valid ${cfg.moduleClass}DTO addTO){
+        return ${cfg.moduleVar}Service.add(addTO);
+        }
+
+        @ApiOperation(value="修改${cfg.tableDesc}",notes="@author ${cfg.author}")
+        @PostMapping("/${cfg.moduleVar}/update")
+        public ResponseDTO<String>update(@RequestBody@Valid ${cfg.moduleClass}DTO updateDTO){
+        return ${cfg.moduleVar}Service.update(updateDTO);
+        }
+
+
+        @ApiOperation(value="删除${cfg.tableDesc}",notes="@author ${cfg.author}")
+        @GetMapping("/${cfg.moduleVar}/delete/{id}")
+        public ResponseDTO<String>delete(@PathVariable("id")Long id){
+        return ${cfg.moduleVar}Service.delete(id);
+        }
+
+
+        @ApiOperation(value="详情${cfg.tableDesc}",notes="@author ${cfg.author}")
+        @GetMapping("/${cfg.moduleVar}/detail/{id}")
+        public ResponseDTO<${cfg.moduleClass}DTO>detail(@PathVariable("id")Long id){
+        return ${cfg.moduleVar}Service.detail(id);
+        }
+}

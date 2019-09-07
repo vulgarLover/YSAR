@@ -1,0 +1,101 @@
+package ${cfg.basePackage}.module .${cfg.modulePackage}.service.impl;
+
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${cfg.basePackage}.common.domain.dto.PageInfoDTO;
+import ${cfg.basePackage}.common.domain.dto.ResponseDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.mapper.${cfg.moduleClass}EntityMapper;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.service.${cfg.moduleClass}Service;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}DTO;
+import com.gangquan360.hddz.web.module.news.domain.dto.NewsDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}QueryDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.entity.${cfg.moduleClass}Entity;
+import ${cfg.basePackage}.util.PaginationUtil;
+import com.gangquan360.smartutil.bean.SmartBeanUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+/**
+ * [ ${cfg.tableDesc} ]
+ *
+ * @author ${cfg.author}
+ * @version 1.0
+ * @company ${cfg.company}
+ * @copyright (c) 2019 ${cfg.company}Inc. All rights reserved.
+ * @date ${cfg.date}
+ * @since JDK1.8
+ */
+@Service
+public class ${cfg.moduleClass}ServiceImpl implements ${cfg.moduleClass}Service{
+
+    @Autowired
+    private ${cfg.moduleClass}EntityMapper ${cfg.moduleVar}Mapper;
+
+    /**
+     * @author ${cfg.author}
+     * @description 分页查询
+     * @date ${cfg.date}
+     */
+    @Override
+    public ResponseDTO<PageInfoDTO<${cfg.moduleClass}DTO>>queryByPage(${cfg.moduleClass}QueryDTO queryDTO){
+        Page page=PaginationUtil.convert2PageQueryInfo(queryDTO);
+        List<${cfg.moduleClass}Entity>entities= ${cfg.moduleVar}Mapper.queryByPage(page,queryDTO);
+        List<${cfg.moduleClass}DTO>dtoList=SmartBeanUtil.copyList(entities, ${cfg.moduleClass}DTO.class);
+        page.setRecords(dtoList);
+        PageInfoDTO<${cfg.moduleClass}DTO>pageInfoDTO=PaginationUtil.convert2PageInfoDTO(page);
+        return ResponseDTO.succData(pageInfoDTO);
+    }
+
+    /**
+     * @author ${cfg.author}
+     * @description 添加
+     * @date ${cfg.date}
+     */
+    @Override
+    public ResponseDTO<String>add(${cfg.moduleClass}DTO addDTO){
+        ${cfg.moduleClass}Entity entity=SmartBeanUtil.copy(addDTO, ${cfg.moduleClass}Entity.class);
+        ${cfg.moduleVar}Mapper.insert(entity);
+        return ResponseDTO.succ();
+    }
+
+
+    /**
+     * @author ${cfg.author}
+     * @description 编辑
+     * @date ${cfg.date}
+     */
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public ResponseDTO<String>update(${cfg.moduleClass}DTO updateDTO){
+        ${cfg.moduleClass}Entity entity=SmartBeanUtil.copy(updateDTO, ${cfg.moduleClass}Entity.class);
+        ${cfg.moduleVar}Mapper.updateById(entity);
+        return ResponseDTO.succ();
+    }
+
+
+    /**
+     * @author ${cfg.author}
+     * @description 删除
+     * @date ${cfg.date}
+     */
+    @Override
+    @Transactional(rollbackFor=Exception.class)
+    public ResponseDTO<String>delete(Long id){
+        ${cfg.moduleVar}Mapper.deleteById(id);
+        return ResponseDTO.succ();
+    }
+
+    /**
+     * @author ${cfg.author}
+     * @description 根据ID查询
+     * @date ${cfg.date}
+     */
+    @Override
+    public ResponseDTO<${cfg.moduleClass}DTO>detail(Long id){
+        ${cfg.moduleClass}Entity entity= ${cfg.moduleVar}Mapper.selectById(id);
+        ${cfg.moduleClass}DTO dto=SmartBeanUtil.copy(entity,${cfg.moduleClass}DTO.class);
+        return ResponseDTO.succData(dto);
+    }
+}

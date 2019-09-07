@@ -1,0 +1,47 @@
+package ${cfg.basePackage}.module .${cfg.modulePackage}.mapper;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.dto.${cfg.moduleClass}QueryDTO;
+import ${cfg.basePackage}.module.${cfg.modulePackage}.domain.entity.${cfg.moduleClass}Entity;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+/**
+ * [ ${cfg.tableDesc} ]
+ *
+ * @author ${cfg.author}
+ * @version 1.0
+ * @company ${cfg.company}
+ * @copyright (c) 2018 ${cfg.company}Inc. All rights reserved.
+ * @date ${cfg.date}
+ * @since JDK1.8
+ */
+@Mapper
+@Component
+public interface ${cfg.moduleClass}EntityMapper extends BaseMapper<${cfg.moduleClass}Entity>{
+
+        /**
+         * 分页查询
+         * @param queryDTO
+         * @return ${cfg.moduleClass}Entity
+         */
+        List<${cfg.moduleClass}Entity>queryByPage(Page page,@Param("query") ${cfg.moduleClass}QueryDTO queryDTO);
+
+        /**
+         * 根据id删除
+         * @param id
+         * @return
+        */
+        void deleteById(@Param("id")Long id);
+
+        /**
+         * 批量删除
+         * @param idList
+         * @return
+        */
+        void deleteByIds(@Param("idList")List<Long>idList);
+}
